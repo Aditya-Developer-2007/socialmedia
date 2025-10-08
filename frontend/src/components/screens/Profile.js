@@ -16,7 +16,7 @@ const Profile = () =>{
         })
             .then(res => res.json())
             .then(result => {
-                // console.log(result)
+                console.log(result)
                 setPic(result.mypost)
             })
             .catch(err => {

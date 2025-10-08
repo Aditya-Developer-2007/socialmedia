@@ -43,8 +43,6 @@ router.get('/getsubpost',requireLogin,(req,res) =>{
 router.get('/allpost', requireLogin, async (req, res) => {
     try {
         const posts = await Post.find()
-        console.log(posts,"ffff");
-        
         res.status(200).json({allPosts:posts});
     } catch (err) {
         console.error(err);
