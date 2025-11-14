@@ -982,13 +982,19 @@ nav .nav-wrapper ul {
 .sidenav li > a > i.material-icons {
   color: #AAAAAA; /* Gray icons */
 }
-.sidenav li > a.nav-icon-link {
-  display: flex; /* Sidenav mein bhi icon links */
+
+/* Sidenav ke andar text dikhao */
+.sidenav .nav-icon-link {
+  display: flex;
   align-items: center;
   height: 50px;
 }
-.sidenav li > a.nav-icon-link span {
-  display: inline-block; /* Sidenav mein text dikhao */
+.sidenav .nav-icon-link i {
+  font-size: 1.8rem;
+  height: 28px;
+}
+.sidenav .nav-icon-link span {
+  display: inline-block !important; /* Text ko force karke dikhao */
   margin-left: 20px;
   font-size: 1rem;
   color: #E0E0E0;
@@ -1003,9 +1009,10 @@ nav .nav-wrapper ul {
   width: 100%;
 }
 
+
 /* --- Responsive Fix (Materialize classes ke saath) --- */
 
-/* 1. Navbar ko justify-content: space-between do */
+/* 1. Navbar ko layout do */
 nav .nav-wrapper {
   display: flex;
   align-items: center;
@@ -1013,41 +1020,45 @@ nav .nav-wrapper {
   padding: 0 25px;
   height: 64px;
 }
+nav .brand-logo {
+  position: static;
+  transform: none;
+}
 
 /* 2. Desktop par Search aur Links dikhao */
 @media (min-width: 993px) {
-  .nav-search-container {
-    display: flex !important;
+  /* Desktop par Icon Links ka text HIDE karo */
+  #nav-mobile .nav-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #AAAAAA !important;
+    transition: all 0.2s ease-in-out;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
   }
-  ul#nav-mobile {
-    display: flex !important;
+  #nav-mobile .nav-icon-link i {
+    font-size: 1.8rem;
   }
-  .sidenav-trigger {
-    display: none !important; /* Desktop par hamburger icon hide karo */
+  #nav-mobile .nav-icon-link span {
+    display: none; /* Desktop par text HIDE */
+  }
+  #nav-mobile .nav-icon-link:hover {
+    color: #C0945D !important;
+    background-color: #2a2a2a;
+  }
+  #nav-mobile .logout-li {
+    margin-left: 20px;
   }
 }
 
-/* 3. Mobile par Search aur Links hide karo */
+/* 3. Mobile par Hamburger Icon dikhao */
 @media (max-width: 992px) {
-  .nav-search-container {
-    display: none !important;
-  }
-  ul#nav-mobile {
-    display: none !important; /* Desktop links hide karo */
-  }
   .sidenav-trigger {
-    display: block !important; /* Mobile par hamburger icon dikhao */
     color: #C0945D; /* Copper color */
-    float: right; /* Ise right mein rakho */
-    position: static;
-    margin-right: 10px;
-  }
-  nav .brand-logo {
-    left: 10px;
-    transform: none;
-    position: static;
   }
   nav .nav-wrapper {
-    padding: 0 10px;
+    padding: 0 10px; /* Thodi padding */
   }
 }

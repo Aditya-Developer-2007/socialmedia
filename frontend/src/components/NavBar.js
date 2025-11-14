@@ -5,7 +5,7 @@ import M from 'materialize-css'
 
 const NavBar = () =>{
   const searchModal = useRef(null)
-  const sidenavRef = useRef(null) // Sidenav ke liye naya Ref
+  const sidenavRef = useRef(null) // Sidenav ke liye Ref
   const {state,dispatch} = useContext(UserContext)
   const [search,setSearch] = useState("");
   const [searchResults, setSearchResults] = useState({ users: [], posts: [] });
@@ -30,7 +30,7 @@ const NavBar = () =>{
         setSearchResults({ users: [], posts: [] });
         return;
     }
-    fetch('https://devly-backend.onrender.com/api/search-all',{
+    fetch('http://localhost:5000/api/search-all',{
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -54,14 +54,15 @@ const NavBar = () =>{
     setSearchResults({ users: [], posts: [] });
   }
 
-  // Yeh links ab 2 jagah use honge: desktop nav aur mobile sidenav
+  // --- YEH FUNCTION UPDATE HO GAYA HAI ---
+  // Ab links mein icon aur text dono hain
   const renderList = () =>{
     if(state){
       return [
-        <li key="home"><Link to="/" className="nav-icon-link"><i className="material-icons">home</i></Link></li>,
-        <li key="profile"><Link to="/profile" className="nav-icon-link"><i className="material-icons">person</i></Link></li>,
-        <li key="create"><Link to="/createpost" className="nav-icon-link"><i className="material-icons">add_box</i></Link></li>,
-        <li key="following"><Link to="/myfollowingpost" className="nav-icon-link"><i className="material-icons">people</i></Link></li>,
+        <li key="home"><Link to="/" className="nav-icon-link"><i className="material-icons">home</i><span>Home</span></Link></li>,
+        <li key="profile"><Link to="/profile" className="nav-icon-link"><i className="material-icons">person</i><span>Profile</span></Link></li>,
+        <li key="create"><Link to="/createpost" className="nav-icon-link"><i className="material-icons">add_box</i><span>Create</span></Link></li>,
+        <li key="following"><Link to="/myfollowingpost" className="nav-icon-link"><i className="material-icons">people</i><span>Following</span></Link></li>,
         
         <li key="logout" className="logout-li">
           <button 
@@ -84,17 +85,16 @@ return (
     <nav className="main-nav-bar">
       <div className="nav-wrapper"> 
         
-        {/* Left: Logo */}
-        <Link to={state?"/":"/auth"} className="brand-logo" style={{position: "static", transform: "none"}}>DEVLY</Link>
+        <Link to={state?"/":"/auth"} className="brand-logo">DEVLY</Link>
         
-        {/* NAYA: Hamburger Icon (Sirf mobile par dikhega) */}
+        {/* Hamburger Icon (Sirf mobile par dikhega) */}
         <a href="#" data-target="mobile-sidenav" className="sidenav-trigger">
           <i className="material-icons">menu</i>
         </a>
 
         {/* Middle: Search Bar (Sirf desktop par dikhega) */}
         {state && (
-          <div className="nav-search-container">
+          <div className="nav-search-container hide-on-med-and-down">
             <i className="material-icons nav-search-icon">search</i>
             <input 
               type="text" 
@@ -107,11 +107,11 @@ return (
         )}
         
         {/* Right: Links (Sirf desktop par dikhenge) */}
-        <ul id="nav-mobile" className="right hide-on-med-and-down"> {/* Hide class add ki */}
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
           {renderList()}
         </ul>
         
-        {/* Modal (Hidden) */}
+        {/* Search Modal (Hidden) */}
         <div id="modal1" className="modal" ref={searchModal}>
           {/* ... modal code ... */}
           <div className="modal-content">
@@ -179,7 +179,7 @@ return (
       </div>
     </nav>
 
-    {/* NAYA: Mobile Sidenav Structure */}
+    {/* Mobile Sidenav Structure */}
     <ul className="sidenav" id="mobile-sidenav" ref={sidenavRef}>
       {renderList()}
     </ul>
