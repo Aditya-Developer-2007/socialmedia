@@ -21,9 +21,8 @@ connectDB()
 
 // Middleware
 app.use(cors({
-  origin: "*",  // Allow frontend domain
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+    origin: "https://devlybytechbuilders.netlify.app",
+    methods: "GET, POST, PUT, DELETE"
 }));
 app.use(express.json());
 
