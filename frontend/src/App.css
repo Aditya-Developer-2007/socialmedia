@@ -32,8 +32,8 @@ a{
 }
 
 .home-card{
-  max-width: 500px;
-  height: max-content;
+  max-width: 700px;
+  height: max-content ;
   margin:26px auto;
 }
 
@@ -44,4 +44,6 @@ a{
 }
 .material-icons:hover{
   cursor: pointer;
+
 }
+

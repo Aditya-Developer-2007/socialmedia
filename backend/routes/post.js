@@ -4,93 +4,128 @@ const Post = require('../models/post.model');
 const requireLogin = require('../middleware/reqlogin');
 
 router.post('/createpost', requireLogin, async (req, res) => {
-    const {title, body, pic} = req.body;
+    const { title, body, pic, githubLink, livePreviewLink } = req.body;
     if (!title || !body || !pic) {
-        return res.status(422).json({ error: 'Please add all the fields' });
+        return res.status(422).json({ error: 'Please add title, body, and picture' });
     }
-    const post = new Post({
-        title,
-        body,
-        photo: pic,
-        postedBy: req.user._id
-    });
-    await post.save()
-    res.status(201).json({ msg: 'Post created successfully' });
-})
 
-router.post('/mypost', requireLogin, async (req, res) => {
     try {
-        const posts = await Post.find({ postedBy: req.user._id })
-        res.status(200).json({mypost:posts});
+        const post = new Post({
+            title,
+            body,
+            photo: pic,
+            githubLink,
+            livePreviewLink,
+            postedBy: req.user
+        });
+        await post.save();
+        res.status(201).json({ msg: 'Project created successfully' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Internal server error' });
     }
-})
-
-router.get('/getsubpost',requireLogin,(req,res) =>{
-    Post.find({postedBy:{$in:req.user.following}})
-        .populate("postedBy","_id name")
-        .populate("comments.postedBy","_id name")        
-        .then(posts =>{
-            res.json({posts})
-        })
-        .catch(err =>{
-            console.log(err)
-        })
 })
 
 router.get('/allpost', requireLogin, async (req, res) => {
     try {
         const posts = await Post.find()
-        res.status(200).json({allPosts:posts});
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-    })
-
-router.put('/like', requireLogin, async (req, res) => {
-    try {
-        const post = await Post.findByIdAndUpdate(req.body.postId, {
-            $push: { likes: req.user._id }
-        }, { new: true })
-        res.status(200).json({ post });
+            .populate("postedBy", "_id name username pic")
+            .populate("comments.postedBy", "_id name username pic")
+            .sort("-createdAt");
+        res.status(200).json({ posts });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal server error' });
     }
 })
 
-router.post('/unlike', requireLogin, async (req, res) => {
+router.get('/getsubpost', requireLogin, async (req, res) => {
     try {
-        const post = await Post.findByIdAndUpdate(req.body.postId, {
-            $pull: { likes: req.user._id }
-        }, { new: true })
-        res.status(200).json({ post });
+        const posts = await Post.find({ postedBy: { $in: req.user.following } })
+            .populate("postedBy", "_id name username pic")
+            .populate("comments.postedBy", "_id name username pic")
+            .sort("-createdAt");
+        res.json({ posts });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal server error' });
     }
 })
+
+router.get('/mypost', requireLogin, async (req, res) => {
+    try {
+        const mypost = await Post.find({ postedBy: req.user._id })
+            .populate("postedBy", "_id name username pic")
+            .sort("-createdAt");
+        res.status(200).json({ mypost });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
+
+router.put('/rate', requireLogin, async (req, res) => {
+    const { score, postId } = req.body;
+    const newRating = {
+        score: score,
+        postedBy: req.user._id
+    };
+
+    try {
+        await Post.findByIdAndUpdate(postId, {
+            $pull: { ratings: { postedBy: req.user._id } }
+        }, { new: true });
+
+        const result = await Post.findByIdAndUpdate(postId, {
+            $push: { ratings: newRating }
+        }, { new: true })
+            .populate("postedBy", "_id name username pic")
+            .populate("comments.postedBy", "_id name username pic");
+        
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        return res.status(422).json({ error: err.message });
+    }
+});
 
 router.put('/comment', requireLogin, async (req, res) => {
     const comment = {
         text: req.body.text,
         postedBy: req.user._id
     }
-    const result = await Post.findByIdAndUpdate(req.body.postId, {
-        $push: { comments: comment }
-    }, { new: true })
-    res.status(200).json({ post: result });
+    try {
+        const result = await Post.findByIdAndUpdate(req.body.postId, {
+            $push: { comments: comment }
+        }, { new: true })
+            .populate("comments.postedBy", "_id name username pic")
+            .populate("postedBy", "_id name username pic");
+        res.status(200).json(result);
+    } catch (err) {
+        console.error(err);
+        return res.status(422).json({ error: err.message });
+    }
 })
 
 router.delete('/deletepost/:postId', requireLogin, async (req, res) => {
-    const result = await Post.findOne({_id:req.params.postId});
-    if(result.postedBy.toString() === req.user._id.toString()) {
-        await Post.findByIdAndDelete(req.params.postId); 
+    try {
+        const post = await Post.findOne({ _id: req.params.postId })
+            .populate("postedBy", "_id");
+
+        if (!post) {
+            return res.status(422).json({ error: "Post not found" });
+        }
+
+        if (post.postedBy._id.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ error: "You are not authorized to delete this post" });
+        }
+
+        await post.deleteOne();
+        res.json({ message: "Successfully deleted" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Internal server error" });
     }
-    return res.status(200).json({ msg: 'Post deleted successfully' });
 })
 
 module.exports = router;

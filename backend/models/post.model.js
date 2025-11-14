@@ -5,20 +5,38 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }, 
-    body:{
+    },
+    body: {
         type: String,
         required: true,
         trim: true
     },
+    githubLink: {
+        type: String,
+        trim: true,
+        default: ""
+    },
+    livePreviewLink: {
+        type: String,
+        trim: true,
+        default: ""
+    },
     photo: {
         type: String,
-        required: true, 
+        required: true,
         trim: true
     },
-    likes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    ratings: [{
+        score: {
+            type: Number,
+            required: true,
+            min: 1,
+            max: 5
+        },
+        postedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }],
     comments: [{
         text: {

@@ -3,13 +3,12 @@ import React,{createContext, useEffect, useReducer,useContext} from 'react'
 import NavBar from './components/NavBar';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Home from './components/screens/Home';
-import Signin from './components/screens/Signin';
-import Signup from './components/screens/Signup';
 import Profile from './components/screens/Profile';
 import CreatePost from './components/screens/CreatePost';
 import { initialState, reducer } from './components/reducers/userReducer';
 import UserProfile from './components/screens/UserProfile';
 import SubscribedUserPost from './components/screens/SubscribedUserPost';
+import Auth from './components/screens/Auth';
 
 export const UserContext = createContext();
 
@@ -20,9 +19,8 @@ const Routing = ()=>{
     const user = JSON.parse(localStorage.getItem("user"));
     if(user){
       dispatch({type:"USER",payload:user})
-      // history.push('/')
     }else{
-      history.push('/signin')
+      history.push('/auth')
     }
   },[])
   
@@ -32,11 +30,8 @@ const Routing = ()=>{
         <Route path="/" exact>
         <Home/>
       </Route>
-      <Route path="/signin">
-        <Signin/>
-      </Route>
-      <Route path="/signup">
-        <Signup/>
+      <Route path="/auth">
+        <Auth/>
       </Route>
       <Route exact path="/profile" >
         <Profile/>
@@ -61,8 +56,8 @@ function App() {
   return (
     <UserContext.Provider value={{state,dispatch}}>
     <BrowserRouter>
-    <NavBar/>
-    <Routing/>
+      <NavBar/>
+      <Routing/>
     </BrowserRouter>
     </UserContext.Provider>
   );

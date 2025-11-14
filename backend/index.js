@@ -10,8 +10,7 @@ const PORT = process.env.PORT || 5000;
 async function connectDB() {
     try {
         const res = await mongoose.connect(
-            'mongodb+srv://pritam:pritam@cluster0.wg3g3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-            // 'mongodb+srv://preetam:preetam@cluster0.wg3g3.mongodb.net/socialmedia?retryWrites=true&w=majority&appName=Cluster0'
+            'mongodb+srv://adityasaini2602_db_user:hfcXGgOr5x7n9QFH@devly.crbxdtj.mongodb.net/?appName=devly'
         );
         console.log('Connected to MongoDB:', res.connection.host);
     } catch (err) {

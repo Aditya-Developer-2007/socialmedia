@@ -1,13 +1,1053 @@
+/* === FINAL CLEANED CSS (Charcoal, Copper & Purple) === */
+
+/* --- 1. Global (Premium Font) --- */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #1A1A1A !important; /* Main Background */
+  color: #E0E0E0; /* Normal Text */
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1, h2, h3, h4, h5, h6 {
+  color: #C0945D; /* Headings (Rich Copper) */
+  font-weight: 600;
+}
+
+/* === 2. Navbar (FIXED) === */
+nav {
+  background-color: #1A1A1A !important;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.1) !important;
+  border-bottom: 1px solid #444444;
+  height: 64px;
+}
+
+/* Flex layout ko nav-wrapper par set kiya */
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  height: 64px;
+}
+
+/* 1. Logo */
+nav .brand-logo {
+  color: #FFD700 !important; /* Gold */
+  font-family: 'Kalam', cursive !important;
+  font-weight: 700;
+  letter-spacing: 0;
+  font-size: 2.4rem;
+  text-transform: none;
+  position: static !important; /* Overlap fix */
+  transform: none !important;
+  flex-shrink: 0; /* Shrink na ho */
+}
+
+/* 2. Search Bar (Center) */
+.nav-search-container {
+  display: flex; /* Desktop par visible */
+  align-items: center;
+  position: relative;
+  width: 40%;
+  max-width: 500px;
+  min-width: 250px;
+  margin: 0 20px;
+}
+.nav-search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+}
+.nav-search-input {
+  width: 100%;
+  height: 40px !important;
+  background-color: #2A2A2A !important;
+  border: 1px solid #444444 !important;
+  border-radius: 22px !important;
+  padding-left: 50px !important;
+  padding-right: 15px !important;
+  color: #E0E0E0 !important;
+  box-sizing: border-box !important;
+  margin-bottom: 0 !important;
+}
+.nav-search-input:focus:not([readonly]) {
+  border: 1px solid #C0945D !important;
+  box-shadow: none !important;
+}
+.nav-search-input::placeholder {
+  color: #888888 !important;
+}
+
+/* 3. Links (Right) */
+nav .nav-wrapper ul {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 10px;
+  position: static;
+  float: none;
+}
+.logout-li {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  margin-left: 20px;
+}
+
+/* Icon Links */
+.nav-icon-link {
+  display: flex; /* Desktop par visible */
+  align-items: center;
+  justify-content: center;
+  color: #AAAAAA !important;
+  transition: all 0.2s ease-in-out;
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+}
+.nav-icon-link i {
+  font-size: 1.8rem;
+}
+.nav-icon-link span {
+  display: none; /* Sirf icon dikhega */
+}
+.nav-icon-link:hover {
+  color: #C0945D !important;
+  background-color: #2a2a2a;
+}
+
+/* Auth Links (Login/Signup) */
+.nav-link-auth {
+  display: flex;
+  padding: 0 16px;
+  margin: 0 6px;
+  border-radius: 20px;
+  line-height: 30px;
+  height: 32px;
+  align-items: center;
+  border: 1px solid #9B59B6 !important;
+  color: #9B59B6 !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+.nav-link-auth:hover {
+   background-color: #9B59B6 !important;
+   color: #FFFFFF !important;
+   transform: translateY(-1px);
+}
+
+/* --- 3. Animated Auth Page (Slider) --- */
+.auth-page-container {
+  display: block;
+  min-height: calc(100vh - 64px);
+  padding-top: 0;
+  background-color: #1A1A1A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Slider Container */
+.auth-container {
+  background-color: #2A2A2A;
+  border-radius: 12px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px; /* Card ki max width */
+  min-height: 600px;
+}
+
+/* Form Containers (Sign in / Sign up) */
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+.signin-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+.signup-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Form Styles */
+.auth-form {
+  background-color: #2A2A2A;
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px !important; /* Padding for grid */
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Form Logo (Kalam) */
+.auth-form h2 {
+  font-family: 'Kalam', cursive !important;
+  color: #FFD700 !important; /* Gold logo */
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-transform: none;
+}
+
+.auth-form input {
+  margin-bottom: 10px !important;
+  color: #E0E0E0 !important;
+  border-bottom: 2px solid #444444 !important;
+}
+.auth-form input:focus:not([readonly]) {
+  border-bottom: 2px solid #C0945D !important;
+  box-shadow: none !important;
+}
+.auth-form ::placeholder {
+  color: #888888 !important;
+}
+
+.auth-form .btn {
+   width: 100%;
+   background-color: #9B59B6 !important; /* Purple */
+   color: #FFFFFF !important;
+   height: 48px;
+   line-height: 48px;
+   margin-top: 20px;
+   font-size: 1.1rem;
+   font-weight: 600;
+   border-radius: 8px;
+   transition: all 0.2s ease-in-out;
+}
+.auth-form .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px 0 rgba(155, 89, 182, 0.4);
+}
+.auth-form .file-field .btn {
+  width: auto;
+  font-size: 1rem;
+  height: 44px;
+  line-height: 44px;
+  margin-top: 0;
+  background-color: #444444 !important;
+  color: #E0E0E0 !important;
+  transition: none;
+}
+.auth-form .file-field .btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Auth Form Grid (for Signup) */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0 15px;
+  width: 100%;
+}
+.grid-span-2 {
+  grid-column: span 2;
+}
+.password-input-container.grid-span-2 {
+  grid-column: span 2;
+}
+.file-field.grid-span-2 {
+   grid-column: span 2;
+}
+
+/* Password 'Eye' Icon */
+.password-input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.password-toggle-icon {
+  position: absolute;
+  top: 12px; /* Center mein */
+  right: 15px;
+  cursor: pointer;
+  color: #C0945D !important; /* Copper */
+}
+
+/* Overlay Slider */
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+.overlay {
+  background: #C0945D; /* Copper */
+  background: linear-gradient(to right, #C0945D, #b38a55);
+  color: #1A1A1A; /* Dark Text */
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.overlay-panel {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.overlay-panel h1 {
+  color: #1A1A1A;
+  font-weight: 700;
+  margin: 0;
+}
+.overlay-panel p {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 20px 0 30px;
+  color: #1A1A1A;
+}
+.ghost-button {
+  border-radius: 20px;
+  border: 1px solid #1A1A1A !important;
+  background: transparent !important;
+  color: #1A1A1A !important;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0 45px;
+  line-height: 40px;
+  height: 42px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+.ghost-button:hover {
+  background-color: #1A1A1A !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px 0 rgba(0,0,0, 0.3);
+}
+.overlay-left {
+  transform: translateX(-20%);
+}
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+/* Animation Logic */
+.auth-container.right-panel-active .signin-container {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.auth-container.right-panel-active .signup-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+.auth-container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+.auth-container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+.auth-container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+.auth-container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+@keyframes show {
+  0%, 49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%, 100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+/* Purane Auth CSS ko Disable karna */
+.auth-card, .auth-branding-side, .auth-form-side {
+  display: none !important;
+}
+
+/* --- 4. "Floating Glass" Post Card --- */
+
+/* --- 4. Naya Kanban Card Grid Layout --- */
+
+/* --- 4. Naya "Instagram-Style" Card Layout --- */
+
+/* Home container (simple centered column) */
+.home {
+  max-width: 650px !important; /* Card ki max width */
+  margin: 30px auto !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  display: block; /* Grid hata diya */
+}
+
+/* Keyframes (pehle se honge, but just in case) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card ka naya style */
+.card.home-card {
+  background-color: #2A2A2A !important;
+  border: 1px solid #444444;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0.1) !important;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+  position: static; /* Reset */
+  height: auto;
+  margin-bottom: 30px;
+}
+.card.home-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px 0 rgba(0,0,0,0.3) !important;
+}
+
+/* 1. Card Header (User Info) */
+.card-header-new {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+}
+.card-header-new img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.card-header-new a {
+  color: #C0945D !important;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.card-header-new .username-subtext {
+  color: #AAAAAA;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+.card-header-new i { /* Delete button */
+  margin-left: auto;
+  cursor: pointer;
+  color: #AAAAAA;
+}
+.card-header-new i:hover {
+  color: #E0E0E0;
+}
+
+/* 2. Card Image */
+.card-image-new img {
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  object-fit: cover;
+}
+
+/* 3. Card Content (Title/Body) */
+.card-content-new {
+  padding: 20px;
+}
+.card-content-new h5 {
+  color: #C0945D !important;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+.card-content-new p {
+  color: #E0E0E0;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+/* 4. Card Actions (Stars & Comment Button) */
+.card-actions-new {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid #444;
+}
+.card-actions-new .rating-section {
+  display: flex;
+  align-items: center;
+}
+.card-actions-new .rating-section .stars {
+  margin-right: 10px;
+}
+.card-actions-new .rating-section .stars i {
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+.card-actions-new .rating-section .rating-text {
+  color: #AAAAAA;
+  font-size: 0.9rem;
+}
+.card-actions-new .comment-button {
+  background-color: #444444 !important;
+  color: #E0E0E0 !important;
+}
+
+/* 5. Comment Section (Hidden by default) */
+.card-comments-new {
+  background-color: #1E1E1E !important;
+  border-top: 1px solid #444;
+  padding: 20px;
+}
+.card-comments-new .comment-list {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+.card-comments-new .comment-list h6 {
+  color: #E0E0E0 !important;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+.card-comments-new .comment-list h6 a {
+  color: #C0945D !important;
+  font-weight: 600;
+}
+.card-comments-new .comment-list p {
+  color: #AAAAAA !important;
+  font-size: 0.9rem;
+}
+
+/* Purane layout ka code hata diya (just in case) */
+.card div[style*="border-right"] {
+   border: none !important;
+}
+/* --- 5. Buttons (Global) --- */
+.btn, .btn-small {
+  background-color: #9B59B6 !important; /* Purple */
+  color: #FFFFFF !important;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+.btn:hover, .btn-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px 0 rgba(155, 89, 182, 0.3);
+}
+
+a[href*="github.com"],
+a[style*="backgroundColor: \"#333\""] {
+   background-color: #C0945D !important; /* Copper */
+   color: #1A1A1A !important;
+   border-radius: 8px;
+}
+a[href*="github.com"]:hover,
+a[style*="backgroundColor: \"#333\""]:hover {
+  box-shadow: 0 4px 10px 0 rgba(192, 148, 93, 0.3);
+}
+
+a[href*="livePreviewLink"],
+a[style*="blue darken-1"] {
+   background-color: #9B59B6 !important; /* Purple */
+   color: #FFFFFF !important;
+   border-radius: 8px;
+}
+a[href*="livePreviewLink"]:hover,
+a[style*="blue darken-1"]:hover {
+  box-shadow: 0 4px 10px 0 rgba(155, 89, 182, 0.3);
+}
+
+button[style*="#546e7a"] { /* View comments */
+   background-color: #444444 !important;
+   color: #E0E0E0 !important;
+   border-radius: 8px;
+}
+button[style*="#546e7a"]:hover {
+  background-color: #555555 !important;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+}
+.btn[class*="red"] {
+    background-color: #D32F2F !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+}
+
+/* --- 6. Profile Page --- */
+h4[style*="#fff"], h6[style*="#e0e0e0"] {
+  color: #C0945D !important; /* Headings */
+}
+/* Profile page text */
+h6[style*="#E0E0E0"], h6[style*="#AAAAAA"] {
+    color: #E0E0E0 !important;
+}
+div[style*="borderBottom: \"1px solid #333\""] {
+  border-bottom: 1px solid #444444 !important;
+}
+
+/* --- 7. Search Modal --- */
+.modal {
+  background-color: #2A2A2A !important;
+  border: 1px solid #444444;
+  border-radius: 12px;
+  max-width: 550px;
+}
+.modal .modal-content {
+  padding-bottom: 10px;
+}
+.modal .modal-footer {
+  background-color: #1E1E1E !important;
+  border-top: 1px solid #444444;
+}
+.modal .modal-footer .btn-flat {
+  color: #AAAAAA !important;
+}
+.collection {
+  border: none !important;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.collection .collection-item {
+  background-color: #2A2A2A !important;
+  border-bottom: 1px solid #444444 !important;
+}
+.collection a:hover .collection-item {
+  background-color: #333333 !important;
+}
+.collection .collection-item .title {
+  color: #E0E0E0 !important;
+  font-weight: 600;
+  display: block;
+}
+.collection .collection-item p {
+  color: #AAAAAA !important;
+  font-size: 0.9rem;
+}
+.collection .collection-item.avatar {
+  min-height: 60px;
+  padding-left: 72px;
+}
+.collection-divider {
+  height: 1px;
+  background-color: #444444;
+  margin: 10px 0;
+  border: none;
+}
+.collection-header {
+  color: #C0945D;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  padding: 0 10px;
+  background-color: transparent;
+  border: none;
+}
+
+/* === 8. RESPONSIVE MEDIA QUERIES === */
+
+@media (max-width: 900px) {
+
+  /* --- Auth Page (Slider) --- */
+  .auth-container {
+    max-width: 100%;
+    min-height: calc(100vh - 64px);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Slider (Overlay) ko mobile par hide kar do */
+  .overlay-container {
+    display: none;
+  }
+
+  /* Forms ko 100% width do */
+  .form-container {
+    width: 100%;
+    position: static;
+    transform: none !important;
+  }
+  
+  .signin-container {
+    opacity: 1;
+    z-index: 2;
+  }
+  .signup-container {
+    opacity: 0;
+    z-index: 1;
+    /* Isko page se poora hata do jab active na ho */
+    display: none;
+  }
+
+  .auth-form {
+    padding: 0 30px !important;
+  }
+
+  /* Jab "Sign Up" active ho */
+  .auth-container.right-panel-active .signin-container {
+    opacity: 0;
+    display: none;
+  }
+  .auth-container.right-panel-active .signup-container {
+    opacity: 1;
+    z-index: 5;
+    display: flex;
+  }
+
+  /* Auth form grid ko mobile par 1 column kar do */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .grid-span-2,
+  .password-input-container.grid-span-2,
+  .file-field.grid-span-2 {
+    grid-column: span 1;
+  }
+
+  /* Naye mobile-only toggle links */
+  .mobile-toggle-link {
+    display: block !important;
+    font-weight: 600;
+    margin-top: 25px;
+    font-size: 1rem;
+    color: #9B59B6 !important; /* Purple */
+    cursor: pointer;
+  }
+
+  /* --- Navbar --- */
+  .nav-search-container {
+    display: none; /* Mobile par search bar hide kar do */
+  }
+  .nav-wrapper {
+    padding: 0 10px !important;
+  }
+  nav .brand-logo {
+    font-size: 1.8rem;
+  }
+  .nav-link-button {
+    font-size: 0.8rem;
+    padding: 0 8px;
+    margin: 0 2px;
+  }
+  .nav-link-auth {
+    font-size: 0.8rem;
+    padding: 0 10px;
+    margin: 0 2px;
+  }
+
+  /* --- Profile Page Header --- */
+  div[style*="justifyContent: \"space-around\""] {
+    flex-direction: column; /* Stack kar do */
+    padding-bottom: 20px;
+  }
+  div[style*="justifyContent: \"space-around\""] > div:last-child {
+    text-align: center;
+    margin-top: 20px;
+  }
+  div[style*="width: \"108%\""] {
+    width: 100% !important;
+    gap: 15px; /* Thoda space */
+  }
+
+  /* --- Card Layout --- */
+  .home {
+    max-width: 100% !important;
+    padding: 0 10px !important;
+    margin-top: 15px !important;
+  }
+  /* Card ka Instagram layout mobile par stack ho jaayega */
+  .card-header-new {
+    padding: 12px 15px;
+  }
+  .card-content-new {
+    padding: 15px;
+  }
+  .card-content-new h5 {
+    font-size: 1.2rem;
+  }
+  .card-content-new p {
+    font-size: 0.9rem;
+  }
+  .card-actions-new {
+    padding: 10px 15px;
+  }
+  .card-actions-new .rating-section .stars i {
+    font-size: 1.5rem;
+  }
+  .card-actions-new .rating-text {
+    font-size: 0.8rem;
+  }
+  .card-actions-new .comment-button {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+  }
+  .card-comments-new {
+    padding: 15px;
+  }
+  
+}
+
+/* === Navbar Links Fix (v3) === */
+
+/* Main navbar ko height do */
+nav.main-nav-bar {
+  height: 64px;
+}
+
+/* <ul> list ko styling do */
+nav .nav-wrapper ul {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 10px; /* Icons ke beech space */
+}
+
+/* Logout button ko alag se handle karo */
+.logout-li {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  margin-left: 20px; /* Icon buttons se door */
+}
+
+/* Naye Icon Links (Bina text) */
+.nav-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #AAAAAA !important; /* Default Gray */
+  transition: all 0.2s ease-in-out;
+  height: 44px; /* Icon button ka size */
+  width: 44px;
+  border-radius: 50%; /* Gol button */
+}
+.nav-icon-link i {
+  font-size: 1.8rem;
+}
+.nav-icon-link span {
+  display: none; /* Text ko hide kar diya */
+}
+.nav-icon-link:hover {
+  color: #C0945D !important; /* Copper */
+  background-color: #2a2a2a; /* Lighter dark */
+}
+
+/* Search bar ko center mein rakho */
+.nav-search-container {
+  margin: 0 auto; /* Yeh search ko center mein rakhega */
+  position: static; /* Absolute hata diya */
+  transform: none; /* Transform hata diya */
+}
+
+/* Responsive (Mobile) Fix */
+@media (max-width: 900px) {
+  .nav-icon-link {
+    display: none; /* Mobile par icons hide kar do */
+  }
+  .nav-search-container {
+    display: none !important; /* Mobile par search bhi hide */
+  }
+}
+
+/* --- Card Image Par Naye Icon Buttons --- */
+
+/* 1. Image container ko relative banaya */
+.card-image-new {
+  position: relative;
+}
+.card-image-new img {
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  object-fit: cover;
+}
+
+/* 2. Icon buttons ke liye naya container */
+.card-image-links {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+/* 3. Icon buttons ka style */
+.image-link-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(42, 42, 42, 0.8); /* #2A2A2A */
+  backdrop-filter: blur(5px);
+  border: 1px solid #444;
+  transition: all 0.2s ease;
+}
+.image-link-btn i {
+  color: #E0E0E0;
+  font-size: 1.4rem;
+}
+.image-link-btn:hover {
+  background-color: #C0945D; /* Copper */
+}
+.image-link-btn:hover i {
+  color: #1A1A1A; /* Dark text */
+}
+
+/* === NAVBAR FIX (OVERRIDE) === */
+
+/* 1. Search container ko hamesha dikhao (desktop par) */
+.nav-search-container {
+  display: flex !important;
+  align-items: center;
+  position: relative;
+  width: 40%;
+  max-width: 500px;
+  min-width: 250px;
+  margin: 0 20px;
+}
+
+/* 2. Icon links ko hamesha dikhao (desktop par) */
+.nav-icon-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: #AAAAAA !important;
+  transition: all 0.2s ease-in-out;
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+}
+.nav-icon-link i {
+  font-size: 1.8rem;
+}
+.nav-icon-link span {
+  display: none;
+}
+.nav-icon-link:hover {
+  color: #C0945D !important;
+  background-color: #2a2a2a;
+}
+
+/* 3. Sirf mobile par hide karo (768px se kam) */
+@media (max-width: 768px) {
+  .nav-icon-link {
+    display: none !important;
+  }
+  .nav-search-container {
+    display: none !important;
+  }
+}
+
+/* === Sidenav Styling (Dark Theme) === */
+.sidenav {
+  background-color: #2A2A2A; /* Lighter charcoal */
+}
+.sidenav li > a {
+  color: #E0E0E0; /* Light text */
+  font-weight: 500;
+}
+.sidenav li > a:hover {
+  background-color: #333333;
+}
+.sidenav li > a > i.material-icons {
+  color: #AAAAAA; /* Gray icons */
+}
+.sidenav li > a.nav-icon-link {
+  display: flex; /* Sidenav mein bhi icon links */
+  align-items: center;
+  height: 50px;
+}
+.sidenav li > a.nav-icon-link span {
+  display: inline-block; /* Sidenav mein text dikhao */
+  margin-left: 20px;
+  font-size: 1rem;
+  color: #E0E0E0;
+}
+.sidenav .logout-li {
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+  padding: 0 5%;
+}
+.sidenav .logout-li button {
+  width: 100%;
+}
+
+/* --- Responsive Fix (Materialize classes ke saath) --- */
+
+/* 1. Navbar ko justify-content: space-between do */
+nav .nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  height: 64px;
+}
+
+/* 2. Desktop par Search aur Links dikhao */
+@media (min-width: 993px) {
+  .nav-search-container {
+    display: flex !important;
+  }
+  ul#nav-mobile {
+    display: flex !important;
+  }
+  .sidenav-trigger {
+    display: none !important; /* Desktop par hamburger icon hide karo */
+  }
+}
+
+/* 3. Mobile par Search aur Links hide karo */
+@media (max-width: 992px) {
+  .nav-search-container {
+    display: none !important;
+  }
+  ul#nav-mobile {
+    display: none !important; /* Desktop links hide karo */
+  }
+  .sidenav-trigger {
+    display: block !important; /* Mobile par hamburger icon dikhao */
+    color: #C0945D; /* Copper color */
+    float: right; /* Ise right mein rakho */
+    position: static;
+    margin-right: 10px;
+  }
+  nav .brand-logo {
+    left: 10px;
+    transform: none;
+    position: static;
+  }
+  nav .nav-wrapper {
+    padding: 0 10px;
+  }
 }
