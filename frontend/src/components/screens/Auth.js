@@ -50,7 +50,7 @@ const Auth = () => {
     };
 
     const uploadSignUpField = () => {
-        fetch("http://localhost:5000/api/signup", {
+        fetch("https://devly-backend.onrender.com/api/signup", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -85,7 +85,7 @@ const Auth = () => {
 
     // --- Sign IN Logic (Signin.js se) ---
     const PostSignInData = () => {
-        fetch("http://localhost:5000/api/signin", {
+        fetch("https://devly-backend.onrender.com/api/signin", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

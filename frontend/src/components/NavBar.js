@@ -30,7 +30,7 @@ const NavBar = () =>{
         setSearchResults({ users: [], posts: [] });
         return;
     }
-    fetch('http://localhost:5000/api/search-all',{
+    fetch('https://devly-backend.onrender.com/api/search-all',{
         method: "post",
         headers: {
             "Content-Type": "application/json",

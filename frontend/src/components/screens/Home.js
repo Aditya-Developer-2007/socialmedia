@@ -13,7 +13,7 @@ const Home = () => {
             history.push('/signin')
             return;
         }
-        fetch('http://localhost:5000/api/allpost', {
+        fetch('https://devly-backend.onrender.com/api/allpost', {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("jwt")
@@ -29,7 +29,7 @@ const Home = () => {
     }, [])
 
     const ratePost = (score, postId) => {
-        fetch('http://localhost:5000/api/rate', {
+        fetch('https://devly-backend.onrender.com/api/rate', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const Home = () => {
         if(!text){
             return;
         }
-        fetch('http://localhost:5000/api/comment', {
+        fetch('https://devly-backend.onrender.com/api/comment', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const Home = () => {
     }
 
     const deletePost = (postId) => {
-        fetch(`http://localhost:5000/api/deletepost/${postId}`, {
+        fetch(`https://devly-backend.onrender.com/api/deletepost/${postId}`, {
             method: "delete",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("jwt")

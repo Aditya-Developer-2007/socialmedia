@@ -22,7 +22,7 @@ const Profile = () => {
         }
         M.Modal.init(editModal.current);
 
-        fetch('http://localhost:5000/api/mypost', {
+        fetch('https://devly-backend.onrender.com/api/mypost', {
             method: "get",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("jwt")
@@ -50,7 +50,7 @@ const Profile = () => {
     }
 
     const updateProfileDetails = () => {
-        fetch('http://localhost:5000/api/update-profile', {
+        fetch('https://devly-backend.onrender.com/api/update-profile', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const Profile = () => {
 
     // --- Card functions (Ratings, Comments) ---
     const ratePost = (score, postId) => {
-        fetch('http://localhost:5000/api/rate', {
+        fetch('https://devly-backend.onrender.com/api/rate', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const Profile = () => {
         if(!text){
             return;
         }
-        fetch('http://localhost:5000/api/comment', {
+        fetch('https://devly-backend.onrender.com/api/comment', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -134,7 +134,7 @@ const Profile = () => {
         .catch(err => console.log(err))
     }
     const deletePost = (postId) => {
-        fetch(`http://localhost:5000/api/deletepost/${postId}`, {
+        fetch(`https://devly-backend.onrender.com/api/deletepost/${postId}`, {
             method: "delete",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("jwt")

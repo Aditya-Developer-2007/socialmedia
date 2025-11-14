@@ -16,7 +16,7 @@ const UserProfile = () => {
             history.push('/signin')
             return;
         }
-        fetch(`http://localhost:5000/api/user/${userId}`, {
+        fetch(`https://devly-backend.onrender.com/api/user/${userId}`, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("jwt")
             }
@@ -37,7 +37,7 @@ const UserProfile = () => {
     }, [userId, state, history])
 
     const followUser = () => {
-        fetch('http://localhost:5000/api/follow', {
+        fetch('https://devly-backend.onrender.com/api/follow', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const UserProfile = () => {
     }
 
     const unfollowUser = () => {
-        fetch('http://localhost:5000/api/unfollow', {
+        fetch('https://devly-backend.onrender.com/api/unfollow', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -96,7 +96,7 @@ const UserProfile = () => {
     }
 
     const ratePost = (score, postId) => {
-        fetch('http://localhost:5000/api/rate', {
+        fetch('https://devly-backend.onrender.com/api/rate', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
@@ -130,7 +130,7 @@ const UserProfile = () => {
         if(!text){
             return;
         }
-        fetch('http://localhost:5000/api/comment', {
+        fetch('https://devly-backend.onrender.com/api/comment', {
             method: "put",
             headers: {
                 "Content-Type": "application/json",
