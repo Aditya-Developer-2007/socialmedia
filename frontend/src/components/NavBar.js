@@ -5,7 +5,7 @@ import M from 'materialize-css'
 
 const NavBar = () => {
     const searchModal = useRef(null)
-    const sidenavRef = useRef(null) // Sidenav ke liye Ref
+    const sidenavRef = useRef(null)
     const { state, dispatch } = useContext(UserContext)
     const [search, setSearch] = useState("");
     const [searchResults, setSearchResults] = useState({ users: [], posts: [] });
@@ -20,40 +20,43 @@ const NavBar = () => {
     }
 
     useEffect(() => {
-        // Components ko initialize karna
-        let modalElems = document.querySelectorAll('.modal');
-        M.Modal.init(modalElems);
-        
-        let sidenavElems = document.querySelectorAll('.sidenav');
-        M.Sidenav.init(sidenavElems);
-    }, []) // Empty array taaki yeh ek baar hi chale
+        if (sidenavRef.current) {
+            M.Sidenav.init(sidenavRef.current);
+        }
+        if (searchModal.current) {
+            M.Modal.init(searchModal.current);
+        }
+    }, [])
 
-    const fetchUsers = (query) => {
+    const fetchUsers = async (query) => {
         setSearch(query);
         if (!query) {
             setSearchResults({ users: [], posts: [] });
             return;
         }
-        // Deploy kiya hua URL
-        fetch('https://devly-backend.onrender.com/api/search-all', {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("jwt")
-            },
-            body: JSON.stringify({
-                query: query
-            })
-        }).then(res => res.json())
-            .then(results => {
-                setSearchResults(results);
-                if (searchModal.current) {
-                    const instance = M.Modal.getInstance(searchModal.current);
+
+        try {
+            const res = await fetch('https://devly-backend.onrender.com/api/search-all', {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("jwt")
+                },
+                body: JSON.stringify({ query })
+            });
+            
+            const results = await res.json();
+            setSearchResults(results);
+
+            if (searchModal.current) {
+                const instance = M.Modal.getInstance(searchModal.current);
+                if (instance) {
                     instance.open();
                 }
-            }).catch(err => {
-                console.log(err);
-            })
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const clearSearch = () => {
@@ -61,7 +64,6 @@ const NavBar = () => {
         setSearchResults({ users: [], posts: [] });
     }
 
-    // Links mein 'sidenav-close' add kiya hai taaki mobile menu click par band ho
     const renderList = () => {
         if (state) {
             return [
@@ -91,12 +93,10 @@ const NavBar = () => {
                 <div className="nav-wrapper">
                     <Link to={state ? "/" : "/auth"} className="brand-logo">DEVLY</Link>
                     
-                    {/* Hamburger Icon */}
                     <a href="#" data-target="mobile-sidenav" className="sidenav-trigger">
                         <i className="material-icons">menu</i>
                     </a>
 
-                    {/* Search Bar (Desktop) */}
                     {state && (
                         <div className="nav-search-container hide-on-med-and-down">
                             <i className="material-icons nav-search-icon">search</i>
@@ -110,12 +110,10 @@ const NavBar = () => {
                         </div>
                     )}
 
-                    {/* Desktop Links */}
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         {renderList()}
                     </ul>
 
-                    {/* Search Modal (Hidden) */}
                     <div id="modal1" className="modal" ref={searchModal}>
                         <div className="modal-content">
                             <h4 style={{ color: "#C0945D" }}>Search Results</h4>
@@ -150,7 +148,6 @@ const NavBar = () => {
                 </div>
             </nav>
 
-            {/* Mobile Sidenav Structure */}
             <ul className="sidenav" id="mobile-sidenav" ref={sidenavRef}>
                 {renderList()}
             </ul>

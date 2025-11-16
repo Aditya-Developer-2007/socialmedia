@@ -4,7 +4,6 @@ const User = require('../models/user.model');
 const Post = require('../models/post.model');
 const requireLogin = require('../middleware/reqlogin');
 
-// User Profile Route (No Change)
 router.get('/user/:id', requireLogin, async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.params.id }).select("-password");
@@ -24,7 +23,6 @@ router.get('/user/:id', requireLogin, async (req, res) => {
     }
 });
 
-// Follow Route (No Change)
 router.put('/follow', requireLogin, async (req, res) => {
     try {
         await User.findByIdAndUpdate(req.body.followId, {
@@ -43,7 +41,6 @@ router.put('/follow', requireLogin, async (req, res) => {
     }
 });
 
-// Unfollow Route (No Change)
 router.put('/unfollow', requireLogin, async (req, res) => {
     try {
         await User.findByIdAndUpdate(req.body.unfollowId, {
@@ -62,7 +59,6 @@ router.put('/unfollow', requireLogin, async (req, res) => {
     }
 });
 
-// Search Route (No Change)
 router.post('/search-all', requireLogin, async (req, res) => {
     const { query } = req.body;
     if (!query) {
@@ -91,26 +87,21 @@ router.post('/search-all', requireLogin, async (req, res) => {
     }
 });
 
-
-// --- NAYA EDIT PROFILE ROUTE ---
 router.put('/update-profile', requireLogin, async (req, res) => {
     const { name, username, course, semester } = req.body;
     
-    // Validation
     if (!name || !username || !course || !semester) {
         return res.status(422).json({ error: "Please fill all required fields" });
     }
 
     try {
-        // Check karo ki naya username pehle se kisi aur ka toh nahi hai
         const existingUser = await User.findOne({ username: username });
         if (existingUser && existingUser._id.toString() !== req.user._id.toString()) {
             return res.status(422).json({ error: "Username is already taken" });
         }
 
-        // User ko update karo
         const updatedUser = await User.findByIdAndUpdate(
-            req.user._id, // User ki ID (jo login hai)
+            req.user._id,
             {
                 $set: {
                     name: name,
@@ -119,14 +110,13 @@ router.put('/update-profile', requireLogin, async (req, res) => {
                     semester: semester
                 }
             },
-            { new: true } // Taaki yeh updated user ko waapis return kare
-        ).select("-password"); // Password mat bhejna
+            { new: true }
+        ).select("-password");
 
         if (!updatedUser) {
             return res.status(404).json({ error: "User not found" });
         }
-
-        // Frontend ko naya, updated user object bhejo
+        
         res.json(updatedUser);
 
     } catch (err) {
@@ -134,6 +124,5 @@ router.put('/update-profile', requireLogin, async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 module.exports = router;

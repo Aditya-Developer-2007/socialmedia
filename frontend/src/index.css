@@ -30,10 +30,11 @@ nav .nav-wrapper {
 }
 nav .brand-logo {
   color: #FFD700 !important; /* Gold */
-  font-family: 'Kalam', cursive !important;
-  font-weight: 700;
-  font-size: 2.2rem;
-  text-transform: none;
+  font-family: 'Montserrat', sans-serif !important; /* Bold Font */
+  font-weight: 700 !important;
+  letter-spacing: 1.5px;
+  font-size: 2rem;
+  text-transform: uppercase;
   position: static !important;
   transform: none !important;
 }
@@ -75,7 +76,15 @@ nav .brand-logo {
 .nav-search-input::placeholder { color: #888888 !important; }
 
 /* Desktop Links (Icons) */
-#nav-mobile .nav-icon-link {
+#nav-mobile {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+#nav-mobile li {
+  height: 64px;
+}
+.nav-icon-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +96,7 @@ nav .brand-logo {
   padding: 0 !important;
   margin: 0 5px;
 }
-#nav-mobile .nav-icon-link i {
+.nav-icon-link i {
   font-size: 1.8rem;
   line-height: 44px;
   height: 44px;
@@ -95,7 +104,7 @@ nav .brand-logo {
 #nav-mobile .nav-icon-link span {
   display: none; /* Desktop par text HIDE */
 }
-#nav-mobile .nav-icon-link:hover {
+.nav-icon-link:hover {
   color: #C0945D !important;
   background-color: #2a2a2a;
 }
@@ -178,7 +187,7 @@ nav .brand-logo {
   align-items: center;
   overflow: hidden;
   padding: 20px;
-  box-sizing: border-box; /* Padding ko include kiya */
+  box-sizing: border-box;
 }
 .auth-container {
   background-color: #2A2A2A;
@@ -209,11 +218,14 @@ nav .brand-logo {
   text-align: center;
 }
 .auth-form h2 {
-  font-family: 'Kalam', cursive !important;
-  color: #FFD700 !important;
-  font-size: 3rem;
-  margin-bottom: 20px;
-  text-transform: none;
+  font-family: 'Montserrat', sans-serif !important; /* Bold Font */
+  font-weight: 700 !important;
+  letter-spacing: 1.5px;
+  color: #FFD700 !important; /* Gold Color */
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
 }
 .auth-form input {
   margin-bottom: 10px !important;
@@ -224,7 +236,6 @@ nav .brand-logo {
   border-bottom: 2px solid #C0945D !important;
   box-shadow: none !important;
 }
-::placeholder { color: #888888 !important; }
 .password-input-container {
   position: relative;
   width: 100%;

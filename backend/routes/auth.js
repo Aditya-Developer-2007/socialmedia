@@ -6,10 +6,8 @@ const userModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 router.post('/signup', async (req, res) => {
-    // 1. course aur semester ko req.body se liya
     const { name, email, password, pic, username, course, semester } = req.body;
 
-    // 2. Validation mein add kiya
     if (!name || !email || !password || !username || !course || !semester) {
         return res.status(422).json({ error: 'Please add all the fields' });
     }
@@ -26,7 +24,6 @@ router.post('/signup', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
         
-        // 3. Naye user object mein save kiya
         const user = new userModel({
             name,
             email,
@@ -62,9 +59,8 @@ router.post("/signin", async (req, res) => {
         if (!isMatch) {
             return res.status(422).json({ error: 'Invalid email or password' });
         }
-        const token = jwt.sign({ id: savedUser._id }, "aaaaaaaaaa", { expiresIn: '1d' });
+        const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-        // 4. Login ke time course aur semester ko bhi frontend par bheja
         const { _id, name, username, followers, following, pic, email: userEmail, course, semester } = savedUser;
         return res.status(200).json({ token, user: { _id, name, email: userEmail, username, followers, following, pic, course, semester } });
     }
