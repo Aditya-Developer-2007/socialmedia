@@ -13,7 +13,8 @@ const CreatePost = () =>{
 
     useEffect(()=>{
         if(url){
-            fetch("http://localhost:5000/api/createpost",{
+            // --- YEH LINE FIX KAR DI HAI ---
+            fetch("https://devly-backend.onrender.com/api/createpost",{
                 method:"post",
                 headers:{
                     "Content-Type":"application/json",
@@ -38,13 +39,15 @@ const CreatePost = () =>{
                 console.log(err)
             })
         }
-    },[url])
+    // --- YEH LINE BHI FIX KAR DI HAI (DEPENDENCY ARRAY) ---
+    },[url, title, body, githubLink, livePreviewLink, history])
 
     const PostDetails = () =>{
         const data = new FormData();
         data.append("file",image);
         data.append("upload_preset","instaclone")
         data.append("cloud_name","igproject")
+        // Yeh line pehle se hi theek thi (https)
         fetch("https://api.cloudinary.com/v1_1/igproject/image/upload",{
             method:"post",
             body:data
