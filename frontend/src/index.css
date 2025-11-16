@@ -152,13 +152,17 @@ nav .brand-logo {
   color: #E0E0E0 !important;
 }
 .sidenav .logout-li {
-  position: absolute;
-  bottom: 20px;
-  width: 90%;
-  padding: 0 5%;
+  position: relative !important; /* Absolute se badal kar relative kiya */
+  bottom: auto !important; /* Positioning hata di */
+  width: 100% !important;
+  padding: 0 !important; /* Padding hata di */
+  margin-top: 20px !important; /* Upar se margin diya */
+  border-top: 1px solid #444444; /* Ek divider add kiya */
 }
+
 .sidenav .logout-li button {
-  width: 100%;
+  width: 90% !important;
+  margin: 10px 5% !important; /* Button ko center mein laaya */
 }
 .sidenav-trigger {
   color: #C0945D !important;
