@@ -1,19 +1,19 @@
-/* === FINAL DEVLY CSS (Premium Dark Theme) === */
+/* === FINAL CLEANED CSS (Charcoal, Copper & Purple) === */
 
 /* --- 1. GLOBAL STYLES --- */
 body {
-  background-color: #1A1A1A !important; /* Dark Charcoal */
-  color: #E0E0E0; /* Light Gray Text */
+  background-color: #1A1A1A !important; /* Main Background */
+  color: #E0E0E0; /* Normal Text */
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #C0945D; /* Rich Copper */
+  color: #C0945D; /* Headings (Rich Copper) */
   font-weight: 600;
 }
 
-/* --- 2. NAVBAR (DESKTOP & MOBILE) --- */
+/* --- 2. NAVBAR (FINAL FIX) --- */
 nav {
   background-color: #1A1A1A !important;
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.1) !important;
@@ -21,7 +21,6 @@ nav {
   height: 64px;
   line-height: 64px;
 }
-
 nav .nav-wrapper {
   display: flex;
   align-items: center;
@@ -29,8 +28,6 @@ nav .nav-wrapper {
   padding: 0 25px;
   height: 64px;
 }
-
-/* Logo */
 nav .brand-logo {
   color: #FFD700 !important; /* Gold */
   font-family: 'Kalam', cursive !important;
@@ -39,7 +36,6 @@ nav .brand-logo {
   text-transform: none;
   position: static !important;
   transform: none !important;
-  white-space: nowrap;
 }
 
 /* Search Bar (Desktop) */
@@ -49,7 +45,7 @@ nav .brand-logo {
   max-width: 500px;
   min-width: 250px;
   height: 40px;
-  display: flex; /* Default display */
+  display: flex;
   align-items: center;
   margin: 0 20px;
 }
@@ -68,7 +64,6 @@ nav .brand-logo {
   border: 1px solid #444444 !important;
   border-radius: 22px !important;
   padding-left: 50px !important;
-  padding-right: 15px !important;
   color: #E0E0E0 !important;
   box-sizing: border-box !important;
   margin: 0 !important;
@@ -77,17 +72,12 @@ nav .brand-logo {
   border: 1px solid #C0945D !important;
   box-shadow: none !important;
 }
+.nav-search-input::placeholder {
+  color: #888888 !important;
+}
 
 /* Desktop Links (Icons) */
-#nav-mobile {
-  display: flex;
-  align-items: center;
-  height: 64px;
-}
-#nav-mobile li {
-  height: 64px;
-}
-.nav-icon-link {
+#nav-mobile .nav-icon-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,17 +89,23 @@ nav .brand-logo {
   padding: 0 !important;
   margin: 0 5px;
 }
-.nav-icon-link i {
+#nav-mobile .nav-icon-link i {
   font-size: 1.8rem;
   line-height: 44px;
   height: 44px;
 }
-.nav-icon-link:hover {
+#nav-mobile .nav-icon-link span {
+  display: none; /* Desktop par text HIDE */
+}
+#nav-mobile .nav-icon-link:hover {
   color: #C0945D !important;
   background-color: #2a2a2a;
 }
-.logout-li button {
-  margin-left: 10px;
+#nav-mobile .logout-li {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  margin-left: 20px;
 }
 
 /* Auth Links */
@@ -129,18 +125,6 @@ nav .brand-logo {
    color: #FFFFFF !important;
 }
 
-/* Hamburger Icon (Sidenav Trigger) */
-.sidenav-trigger {
-  color: #C0945D !important;
-  margin: 0;
-  cursor: pointer;
-  display: none; /* Desktop par hidden */
-}
-.sidenav-trigger i {
-  font-size: 2rem;
-}
-
-
 /* --- 3. SIDENAV (MOBILE MENU) --- */
 .sidenav {
   background-color: #2A2A2A !important;
@@ -149,7 +133,7 @@ nav .brand-logo {
 .sidenav li > a {
   color: #E0E0E0 !important;
   font-weight: 500;
-  padding: 0 32px !important;
+  padding: 0 25px !important;
   display: flex;
   align-items: center;
 }
@@ -160,12 +144,24 @@ nav .brand-logo {
   color: #AAAAAA !important;
   margin-right: 20px;
 }
+/* Sidenav ke andar text dikhao */
+.sidenav .nav-icon-link span {
+  display: inline-block !important; /* Text ko force karke dikhao */
+  margin-left: 20px;
+  font-size: 1rem;
+  color: #E0E0E0 !important;
+}
 .sidenav .logout-li {
-  padding: 0 32px;
-  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+  padding: 0 5%;
 }
 .sidenav .logout-li button {
   width: 100%;
+}
+.sidenav-trigger {
+  color: #C0945D !important;
 }
 
 
@@ -180,7 +176,6 @@ nav .brand-logo {
   overflow: hidden;
   padding: 20px;
 }
-
 .auth-container {
   background-color: #2A2A2A;
   border-radius: 12px;
@@ -191,7 +186,6 @@ nav .brand-logo {
   max-width: 900px;
   min-height: 600px;
 }
-
 .form-container {
   position: absolute;
   top: 0;
@@ -200,18 +194,16 @@ nav .brand-logo {
 }
 .signin-container { left: 0; width: 50%; z-index: 2; }
 .signup-container { left: 0; width: 50%; opacity: 0; z-index: 1; }
-
 .auth-form {
   background-color: #2A2A2A;
   display: flex;
   flex-direction: column;
-  padding: 0 40px;
+  padding: 0 40px !important;
   height: 100%;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
-
 .auth-form h2 {
   font-family: 'Kalam', cursive !important;
   color: #FFD700 !important;
@@ -219,7 +211,6 @@ nav .brand-logo {
   margin-bottom: 20px;
   text-transform: none;
 }
-
 .auth-form input {
   margin-bottom: 10px !important;
   color: #E0E0E0 !important;
@@ -229,8 +220,7 @@ nav .brand-logo {
   border-bottom: 2px solid #C0945D !important;
   box-shadow: none !important;
 }
-
-/* Password Eye */
+::placeholder { color: #888888 !important; }
 .password-input-container {
   position: relative;
   width: 100%;
@@ -243,20 +233,37 @@ nav .brand-logo {
   cursor: pointer;
   color: #C0945D !important;
 }
-
-/* Auth Buttons */
-.btn, .btn-small {
-  background-color: #9B59B6 !important;
-  color: #FFFFFF !important;
-  border-radius: 8px;
+.auth-form .btn {
+   width: 100%;
+   background-color: #9B59B6 !important;
+   color: #FFFFFF !important;
+   height: 48px;
+   line-height: 48px;
+   margin-top: 20px;
+   font-size: 1.1rem;
+   font-weight: 600;
+   border-radius: 8px;
 }
-.btn:hover {
-  background-color: #8E44AD !important;
-  box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
+.auth-form .file-field .btn {
+  width: auto;
+  font-size: 1rem;
+  height: 44px;
+  line-height: 44px;
+  margin-top: 0;
+  background-color: #444444 !important;
+  color: #E0E0E0 !important;
 }
-.btn.red { background-color: #D32F2F !important; }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0 15px;
+  width: 100%;
+}
+.grid-span-2, .password-input-container.grid-span-2, .file-field.grid-span-2 {
+  grid-column: span 2;
+}
 
-/* Overlay */
+/* Auth Overlay */
 .overlay-container {
   position: absolute;
   top: 0;
@@ -275,7 +282,6 @@ nav .brand-logo {
   height: 100%;
   width: 200%;
   transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
 }
 .overlay-panel {
   position: absolute;
@@ -288,9 +294,9 @@ nav .brand-logo {
   height: 100%;
   width: 50%;
   text-align: center;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
 }
+.overlay-panel h1 { color: #1A1A1A; font-weight: 700; margin: 0; }
+.overlay-panel p { font-size: 1.1rem; font-weight: 400; margin: 20px 0 30px; color: #1A1A1A; }
 .ghost-button {
   border-radius: 20px;
   border: 1px solid #1A1A1A !important;
@@ -298,56 +304,63 @@ nav .brand-logo {
   color: #1A1A1A !important;
   padding: 10px 45px;
   font-weight: bold;
-  text-transform: uppercase;
   cursor: pointer;
 }
 .overlay-left { transform: translateX(-20%); }
 .overlay-right { right: 0; transform: translateX(0); }
+.auth-container.right-panel-active .signin-container { display: none; }
+.auth-container:not(.right-panel-active) .signup-container { display: none; }
+.mobile-toggle-link { display: none; }
 
 /* Auth Animations */
-.auth-container.right-panel-active .signin-container { transform: translateX(100%); opacity: 0; }
-.auth-container.right-panel-active .signup-container { transform: translateX(100%); opacity: 1; z-index: 5; animation: show 0.6s; }
-.auth-container.right-panel-active .overlay-container { transform: translateX(-100%); }
-.auth-container.right-panel-active .overlay { transform: translateX(50%); }
-.auth-container.right-panel-active .overlay-left { transform: translateX(0); }
-.auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
+@media (min-width: 601px) {
+  .auth-container.right-panel-active .signin-container { transform: translateX(100%); opacity: 0; display: flex; }
+  .auth-container.right-panel-active .signup-container { transform: translateX(100%); opacity: 1; z-index: 5; animation: show 0.6s; display: flex; }
+  .auth-container.right-panel-active .overlay-container { transform: translateX(-100%); }
+  .auth-container.right-panel-active .overlay { transform: translateX(50%); }
+  .auth-container.right-panel-active .overlay-left { transform: translateX(0); }
+  .auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
+}
+@keyframes show { 0%, 49.99% { opacity: 0; } 50%, 100% { opacity: 1; } }
 
-@keyframes show { 0%, 49.99% { opacity: 0; z-index: 1; } 50%, 100% { opacity: 1; z-index: 5; } }
 
-
-/* --- 5. HOME & POST CARDS (Floating Glass) --- */
+/* --- 5. HOME & POST CARDS (Instagram Style) --- */
 .home {
-  max-width: 1100px !important;
+  max-width: 650px !important;
   margin: 30px auto !important;
-  padding: 0 20px !important;
+  padding: 0 !important;
+  display: block;
 }
 
 .card.home-card {
   background-color: #2A2A2A !important;
   border: 1px solid #444444;
-  box-shadow: 0 10px 40px 0 rgba(0,0,0,0.3) !important;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0.1) !important;
   border-radius: 12px;
   overflow: hidden;
-  position: relative;
+  position: static;
+  height: auto;
   margin-bottom: 30px;
 }
+.card.home-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px 0 rgba(0,0,0,0.3) !important;
+}
 
-/* Layer 1: Image */
-.card-image-background {
-  width: 100%;
-  height: 550px;
-  background-color: #1A1A1A;
+.card-header-new {
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 15px 20px;
 }
-.card-image-background img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
+.card-header-new img { width: 40px; height: 40px; border-radius: 50%; margin-right: 15px; }
+.card-header-new a { color: #C0945D !important; font-weight: 600; font-size: 1rem; }
+.card-header-new .username-subtext { color: #AAAAAA; font-size: 0.9rem; line-height: 1.2; }
+.card-header-new i { margin-left: auto; cursor: pointer; color: #AAAAAA; }
+.card-header-new i:hover { color: #E0E0E0; }
 
-/* Image Links (GitHub/Live) */
+.card-image-new { position: relative; }
+.card-image-new img { width: 100%; height: auto; max-height: 700px; object-fit: cover; }
+
 .card-image-links {
   position: absolute;
   top: 15px;
@@ -370,112 +383,79 @@ nav .brand-logo {
 .image-link-btn:hover { background-color: #C0945D; }
 .image-link-btn:hover i { color: #1A1A1A; }
 
-/* Layer 2: User Info */
-.card-user-overlay {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+.card-content-new { padding: 20px; }
+.card-content-new h5 { margin-top: 0; margin-bottom: 10px; font-size: 1.3rem; }
+.card-content-new p { color: #E0E0E0; font-size: 1rem; margin-bottom: 0; }
+
+.card-actions-new {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background-color: rgba(26, 26, 26, 0.8);
-  backdrop-filter: blur(8px);
-  padding: 8px 12px;
-  border-radius: 50px;
-  border: 1px solid #444;
+  padding: 15px 20px;
+  border-top: 1px solid #444;
 }
-.card-user-overlay img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  margin-right: 10px;
+.card-actions-new .rating-section { display: flex; align-items: center; }
+.card-actions-new .rating-section .stars i { cursor: pointer; font-size: 1.8rem; }
+.card-actions-new .rating-section .rating-text { color: #AAAAAA; font-size: 0.9rem; margin-left: 10px; }
+.card-actions-new .comment-button {
+  background-color: #444444 !important;
+  color: #E0E0E0 !important;
 }
-.card-user-overlay a { color: #C0945D !important; font-weight: 600; }
-.card-user-overlay div { line-height: 1.2; font-size: 0.9rem; color: #AAAAAA; }
 
-/* Layer 3: Details/Comments Overlay */
-.card-content-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40%;
-  height: 100%;
-  background-color: rgba(42, 42, 42, 0.9);
-  backdrop-filter: blur(15px);
-  border-left: 1px solid #444444;
-  padding: 30px;
-  box-sizing: border-box;
+.card-comments-new {
+  background-color: #1E1E1E !important;
+  border-top: 1px solid #444;
+  padding: 20px;
+}
+.card-comments-new .comment-list { max-height: 250px; overflow-y: auto; margin-bottom: 15px; }
+.card-comments-new .comment-list h6 { color: #E0E0E0 !important; font-size: 0.95rem; margin-bottom: 10px; }
+.card-comments-new .comment-list h6 a { color: #C0945D !important; }
+
+/* --- 6. PROFILE PAGE --- */
+.profile-header {
+  max-width: 1000px;
+  margin: 25px auto;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #444444;
+  padding-bottom: 25px;
+  position: relative;
 }
-.card-content-overlay h5 { color: #C0945D !important; font-weight: 600; margin-top: 0; }
-.card-content-overlay p { color: #E0E0E0; flex-grow: 1; overflow-y: auto; max-height: 150px; }
+.profile-header h4 { color: #C0945D !important; }
+.profile-header h6 { color: #E0E0E0 !important; }
+.profile-header h6[style*="#AAAAAA"] { color: #AAAAAA !important; }
 
-/* Comments */
-.comment-section-overlay { height: 100%; display: flex; flex-direction: column; }
-.comment-list { flex-grow: 1; overflow-y: auto; margin-bottom: 15px; }
-.comment-list h6 { color: #E0E0E0 !important; font-size: 0.9rem; margin-bottom: 8px; }
-.comment-list h6 a { color: #C0945D !important; }
-
-
-/* --- 6. OTHER MODALS --- */
+/* --- 7. MODALS --- */
 .modal {
   background-color: #2A2A2A !important;
   border: 1px solid #444444;
   color: #E0E0E0;
 }
-.modal .modal-footer {
-  background-color: #1E1E1E !important;
-}
-.collection .collection-item {
-  background-color: #2A2A2A !important;
-  border-bottom: 1px solid #444;
-}
-.collection .collection-item.avatar .title {
-  color: #E0E0E0;
-}
+.modal .modal-footer { background-color: #1E1E1E !important; }
+.collection { border: none !important; }
+.collection .collection-item { background-color: #2A2A2A !important; border-bottom: 1px solid #444; }
+.collection a:hover .collection-item { background-color: #333333 !important; }
+.collection .collection-item.avatar .title { color: #E0E0E0; }
+.collection-header { color: #C0945D; }
 
-
-/* --- 7. RESPONSIVE BREAKPOINTS (MEDIA QUERIES) --- */
-
-/* Tablet & Mobile (Below 992px) */
+/* --- 8. RESPONSIVE --- */
 @media (max-width: 992px) {
-  /* Navbar changes */
+  /* Mobile Navbar */
+  .nav-wrapper { padding: 0 10px; }
   .sidenav-trigger { display: block !important; }
-  .nav-search-container { display: none; }
-  /* Important: Hide default desktop UL */
-  nav ul.right { display: none !important; }
-  
-  nav .brand-logo {
-    position: absolute !important;
-    left: 50%;
-    transform: translateX(-50%) !important;
-  }
-}
+  .nav-search-container { display: none !important; }
+  ul#nav-mobile { display: none !important; }
+  nav .brand-logo { position: static !important; }
 
-/* Mobile Only (Below 600px) */
-@media (max-width: 600px) {
-  /* Auth Page Stack */
-  .auth-container {
-    min-height: auto;
-    height: auto;
-    overflow: visible;
-  }
+  /* Mobile Auth Page */
+  .auth-container { max-width: 450px; min-height: auto; }
   .overlay-container { display: none; }
-  .form-container {
-    position: relative;
-    width: 100%;
-    height: auto;
-    transition: none;
-    opacity: 1;
-    z-index: 1;
-  }
-  .signin-container, .signup-container {
-    width: 100%;
-  }
-  /* Toggle logic handled by JS state in Auth.js */
-  .auth-container.right-panel-active .signin-container { display: none; }
-  .auth-container:not(.right-panel-active) .signup-container { display: none; }
-  
+  .form-container { width: 100%; position: relative; }
+  .signin-container, .signup-container { transform: none !important; opacity: 1; }
+  .auth-form { padding: 0 30px !important; }
+  .form-grid { grid-template-columns: 1fr; }
+  .grid-span-2, .password-input-container.grid-span-2, .file-field.grid-span-2 { grid-column: span 1; }
   .mobile-toggle-link {
     display: block !important;
     margin-top: 20px;
@@ -484,15 +464,16 @@ nav .brand-logo {
     font-weight: 600;
   }
   
-  /* Card Stack on Mobile */
-  .card-content-overlay {
-    position: relative;
-    width: 100%;
-    height: auto;
-    border-left: none;
-    border-top: 1px solid #444;
-  }
-  .card-image-background {
-    height: 300px;
-  }
+  /* Mobile Profile Header */
+  .profile-header { flex-direction: column; text-align: center; }
+  .profile-header > div:last-child { margin-top: 20px; }
+}
+
+@media (max-width: 600px) {
+  /* Mobile Cards */
+  .home { margin-top: 15px !important; padding: 0 10px !important; }
+  .card-header-new { padding: 12px 15px; }
+  .card-content-new { padding: 15px; }
+  .card-actions-new { padding: 10px 15px; }
+  .card-comments-new { padding: 15px; }
 }

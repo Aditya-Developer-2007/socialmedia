@@ -20,13 +20,13 @@ const NavBar = () => {
     }
 
     useEffect(() => {
-        // Sirf ek baar initialize karein
-        const modalElems = document.querySelectorAll('.modal');
+        // Components ko initialize karna
+        let modalElems = document.querySelectorAll('.modal');
         M.Modal.init(modalElems);
         
-        const sidenavElems = document.querySelectorAll('.sidenav');
+        let sidenavElems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(sidenavElems);
-    }, []) // Empty dependency array
+    }, []) // Empty array taaki yeh ek baar hi chale
 
     const fetchUsers = (query) => {
         setSearch(query);
@@ -34,7 +34,7 @@ const NavBar = () => {
             setSearchResults({ users: [], posts: [] });
             return;
         }
-        // Deploy kiya hua URL use karein
+        // Deploy kiya hua URL
         fetch('https://devly-backend.onrender.com/api/search-all', {
             method: "post",
             headers: {
@@ -47,8 +47,10 @@ const NavBar = () => {
         }).then(res => res.json())
             .then(results => {
                 setSearchResults(results);
-                const instance = M.Modal.getInstance(searchModal.current);
-                instance.open();
+                if (searchModal.current) {
+                    const instance = M.Modal.getInstance(searchModal.current);
+                    instance.open();
+                }
             }).catch(err => {
                 console.log(err);
             })
@@ -59,7 +61,7 @@ const NavBar = () => {
         setSearchResults({ users: [], posts: [] });
     }
 
-    // Links mein 'sidenav-close' class add ki hai
+    // Links mein 'sidenav-close' add kiya hai taaki mobile menu click par band ho
     const renderList = () => {
         if (state) {
             return [
