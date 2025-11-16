@@ -16,7 +16,7 @@ router.post('/createpost', requireLogin, async (req, res) => {
             photo: pic,
             githubLink,
             livePreviewLink,
-            postedBy: req.user
+            postedBy: req.user._id
         });
         await post.save();
         res.status(201).json({ msg: 'Project created successfully' });
