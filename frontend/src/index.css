@@ -45,7 +45,7 @@ nav .brand-logo {
   max-width: 500px;
   min-width: 250px;
   height: 40px;
-  display: flex;
+  display: flex; /* Desktop par dikhega */
   align-items: center;
   margin: 0 20px;
 }
@@ -72,9 +72,7 @@ nav .brand-logo {
   border: 1px solid #C0945D !important;
   box-shadow: none !important;
 }
-.nav-search-input::placeholder {
-  color: #888888 !important;
-}
+.nav-search-input::placeholder { color: #888888 !important; }
 
 /* Desktop Links (Icons) */
 #nav-mobile .nav-icon-link {
@@ -125,6 +123,14 @@ nav .brand-logo {
    color: #FFFFFF !important;
 }
 
+/* Hamburger Icon */
+.sidenav-trigger {
+  color: #C0945D !important;
+  margin: 0;
+  cursor: pointer;
+}
+
+
 /* --- 3. SIDENAV (MOBILE MENU) --- */
 .sidenav {
   background-color: #2A2A2A !important;
@@ -152,20 +158,13 @@ nav .brand-logo {
   color: #E0E0E0 !important;
 }
 .sidenav .logout-li {
-  position: relative !important; /* Absolute se badal kar relative kiya */
-  bottom: auto !important; /* Positioning hata di */
-  width: 100% !important;
-  padding: 0 !important; /* Padding hata di */
-  margin-top: 20px !important; /* Upar se margin diya */
-  border-top: 1px solid #444444; /* Ek divider add kiya */
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+  padding: 0 5%;
 }
-
 .sidenav .logout-li button {
-  width: 90% !important;
-  margin: 10px 5% !important; /* Button ko center mein laaya */
-}
-.sidenav-trigger {
-  color: #C0945D !important;
+  width: 100%;
 }
 
 
@@ -179,6 +178,7 @@ nav .brand-logo {
   align-items: center;
   overflow: hidden;
   padding: 20px;
+  box-sizing: border-box; /* Padding ko include kiya */
 }
 .auth-container {
   background-color: #2A2A2A;
@@ -316,7 +316,7 @@ nav .brand-logo {
 .auth-container:not(.right-panel-active) .signup-container { display: none; }
 .mobile-toggle-link { display: none; }
 
-/* Auth Animations */
+/* Auth Animations (Desktop) */
 @media (min-width: 601px) {
   .auth-container.right-panel-active .signin-container { transform: translateX(100%); opacity: 0; display: flex; }
   .auth-container.right-panel-active .signup-container { transform: translateX(100%); opacity: 1; z-index: 5; animation: show 0.6s; display: flex; }
@@ -336,6 +336,11 @@ nav .brand-logo {
   display: block;
 }
 
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .card.home-card {
   background-color: #2A2A2A !important;
   border: 1px solid #444444;
@@ -345,6 +350,7 @@ nav .brand-logo {
   position: static;
   height: auto;
   margin-bottom: 30px;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 .card.home-card:hover {
   transform: translateY(-5px);
@@ -430,7 +436,7 @@ nav .brand-logo {
 .profile-header h6 { color: #E0E0E0 !important; }
 .profile-header h6[style*="#AAAAAA"] { color: #AAAAAA !important; }
 
-/* --- 7. MODALS --- */
+/* --- 7. MODALS (Search, Edit) --- */
 .modal {
   background-color: #2A2A2A !important;
   border: 1px solid #444444;
@@ -446,14 +452,19 @@ nav .brand-logo {
 /* --- 8. RESPONSIVE --- */
 @media (max-width: 992px) {
   /* Mobile Navbar */
-  .nav-wrapper { padding: 0 10px; }
   .sidenav-trigger { display: block !important; }
   .nav-search-container { display: none !important; }
   ul#nav-mobile { display: none !important; }
-  nav .brand-logo { position: static !important; }
-
+  nav .nav-wrapper { padding: 0 10px; }
+  nav .brand-logo { 
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  
   /* Mobile Auth Page */
-  .auth-container { max-width: 450px; min-height: auto; }
+  .auth-page-container { padding: 0; }
+  .auth-container { max-width: 100%; min-height: calc(100vh - 64px); border-radius: 0; }
   .overlay-container { display: none; }
   .form-container { width: 100%; position: relative; }
   .signin-container, .signup-container { transform: none !important; opacity: 1; }
