@@ -31,6 +31,7 @@ router.get('/allpost', requireLogin, async (req, res) => {
         const posts = await Post.find()
             .populate("postedBy", "_id name username pic")
             .populate("comments.postedBy", "_id name username pic")
+            .populate("ratings.postedBy", "_id name") // --- YEH LINE ADD KI HAI ---
             .sort("-createdAt");
         res.status(200).json({ posts });
     } catch (err) {
@@ -44,6 +45,7 @@ router.get('/getsubpost', requireLogin, async (req, res) => {
         const posts = await Post.find({ postedBy: { $in: req.user.following } })
             .populate("postedBy", "_id name username pic")
             .populate("comments.postedBy", "_id name username pic")
+            .populate("ratings.postedBy", "_id name") // --- YEH LINE ADD KI HAI ---
             .sort("-createdAt");
         res.json({ posts });
     } catch (err) {
@@ -56,6 +58,8 @@ router.get('/mypost', requireLogin, async (req, res) => {
     try {
         const mypost = await Post.find({ postedBy: req.user._id })
             .populate("postedBy", "_id name username pic")
+            .populate("comments.postedBy", "_id name username pic") // Just in case
+            .populate("ratings.postedBy", "_id name") // --- YEH LINE ADD KI HAI ---
             .sort("-createdAt");
         res.status(200).json({ mypost });
     } catch (err) {
@@ -80,7 +84,8 @@ router.put('/rate', requireLogin, async (req, res) => {
             $push: { ratings: newRating }
         }, { new: true })
             .populate("postedBy", "_id name username pic")
-            .populate("comments.postedBy", "_id name username pic");
+            .populate("comments.postedBy", "_id name username pic")
+            .populate("ratings.postedBy", "_id name"); // --- YEH LINE ADD KI HAI ---
         
         res.json(result);
     } catch (err) {
@@ -99,7 +104,8 @@ router.put('/comment', requireLogin, async (req, res) => {
             $push: { comments: comment }
         }, { new: true })
             .populate("comments.postedBy", "_id name username pic")
-            .populate("postedBy", "_id name username pic");
+            .populate("postedBy", "_id name username pic")
+            .populate("ratings.postedBy", "_id name"); // --- YEH LINE ADD KI HAI ---
         res.status(200).json(result);
     } catch (err) {
         console.error(err);
