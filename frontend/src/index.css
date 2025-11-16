@@ -970,22 +970,24 @@ nav .nav-wrapper ul {
 
 /* === Sidenav Styling (Dark Theme) === */
 .sidenav {
-  background-color: #2A2A2A; /* Lighter charcoal */
+  background-color: #2A2A2A !important; /* Lighter charcoal */
+  width: 280px; /* Thoda chauda */
 }
 .sidenav li > a {
-  color: #E0E0E0; /* Light text */
+  color: #E0E0E0 !important; /* Light text */
   font-weight: 500;
+  padding: 0 25px !important; /* Spacing */
 }
 .sidenav li > a:hover {
   background-color: #333333;
 }
 .sidenav li > a > i.material-icons {
-  color: #AAAAAA; /* Gray icons */
+  color: #AAAAAA !important; /* Gray icons */
 }
 
 /* Sidenav ke andar text dikhao */
 .sidenav .nav-icon-link {
-  display: flex;
+  display: flex !important;
   align-items: center;
   height: 50px;
 }
@@ -997,8 +999,10 @@ nav .nav-wrapper ul {
   display: inline-block !important; /* Text ko force karke dikhao */
   margin-left: 20px;
   font-size: 1rem;
-  color: #E0E0E0;
+  color: #E0E0E0 !important;
 }
+
+/* Logout button ko Sidenav mein neeche rakho */
 .sidenav .logout-li {
   position: absolute;
   bottom: 20px;
@@ -1009,10 +1013,12 @@ nav .nav-wrapper ul {
   width: 100%;
 }
 
+/* Hamburger icon ko color do */
+.sidenav-trigger i {
+  color: #C0945D !important; /* Copper color */
+}
 
-/* --- Responsive Fix (Materialize classes ke saath) --- */
-
-/* 1. Navbar ko layout do */
+/* Navbar wrapper ko fix karo */
 nav .nav-wrapper {
   display: flex;
   align-items: center;
@@ -1020,45 +1026,8 @@ nav .nav-wrapper {
   padding: 0 25px;
   height: 64px;
 }
-nav .brand-logo {
-  position: static;
-  transform: none;
-}
-
-/* 2. Desktop par Search aur Links dikhao */
-@media (min-width: 993px) {
-  /* Desktop par Icon Links ka text HIDE karo */
-  #nav-mobile .nav-icon-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #AAAAAA !important;
-    transition: all 0.2s ease-in-out;
-    height: 44px;
-    width: 44px;
-    border-radius: 50%;
-  }
-  #nav-mobile .nav-icon-link i {
-    font-size: 1.8rem;
-  }
-  #nav-mobile .nav-icon-link span {
-    display: none; /* Desktop par text HIDE */
-  }
-  #nav-mobile .nav-icon-link:hover {
-    color: #C0945D !important;
-    background-color: #2a2a2a;
-  }
-  #nav-mobile .logout-li {
-    margin-left: 20px;
-  }
-}
-
-/* 3. Mobile par Hamburger Icon dikhao */
 @media (max-width: 992px) {
-  .sidenav-trigger {
-    color: #C0945D; /* Copper color */
-  }
   nav .nav-wrapper {
-    padding: 0 10px; /* Thodi padding */
+    padding: 0 10px; /* Mobile par kam padding */
   }
 }

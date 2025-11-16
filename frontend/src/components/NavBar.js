@@ -180,9 +180,9 @@ return (
     </nav>
 
     {/* Mobile Sidenav Structure */}
-    <ul className="sidenav" id="mobile-sidenav" ref={sidenavRef}>
-      {renderList()}
-    </ul>
+   <ul id="nav-mobile" className="right hide-on-med-and-down">
+    {renderList()}
+  </ul>
     </>
 )
 }
